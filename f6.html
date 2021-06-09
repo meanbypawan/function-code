@@ -1,0 +1,30 @@
+<script>
+    function Customer(id,name,account_no,mobile,emailid,bal){
+       this.id = id;
+       this.name = name;
+       this.account_no = account_no;
+       this.mobile = mobile;
+       this.emailid = emailid;
+       this.bal = bal;
+
+       this.deposite = function(amount){
+           this.bal = this.bal + amount;
+           document.write("<br>Amount "+amount+" deposited..");
+       }
+       this.withdrawal = function(){
+           var amount = prompt("Enter Amount To be Withdraw");
+           this.bal = this.bal - amount*1;
+       }
+       this.balanceEnquiry = function(){
+           document.write("<br>Total Balance : "+this.bal);
+       }
+    }
+    
+    var c = new Customer(1,"Rahul","sbi11001","9009111222","rahul@gmail.com",10000);
+    c.balanceEnquiry();
+    c.deposite(5000);
+    c.balanceEnquiry();
+
+    c.withdrawal();
+    c.balanceEnquiry();
+</script>

@@ -1,0 +1,44 @@
+<script>
+/*
+  WA Javascript program to calculate the addition,subtraction and multiplicatio of
+  2 number in object oriented style.
+  Let Suppose object is Arithmetic 
+  Object will have 2 properties say a and b
+  Object will have 4 behaviour say setData(),add(),sub(),multiply()
+*/
+ function Arithmetic(){
+    this.setData = function(a,b){
+        this.a = a;
+        this.b = b;
+    }
+    this.add = function(){
+        document.write("<br>Addition : "+(this.a + this.b));
+    }
+    this.sub = function(){
+        document.write("<br>Subtraction : "+(this.a - this.b));
+    }
+    this.multiply = function(){
+        document.write("<br>Multiplication : "+(this.a * this.b));
+    }
+ }
+
+ var obj = new Arithmetic();
+ 
+ document.write("<br>Press 1 for addition");
+ document.write("<br>Press 2 for sub.");
+ document.write("<br>Press 3 fro multiplication");
+ var choice = prompt("Enter your choice");
+ 
+ var n1 = prompt("Enter 1st number");
+ var n2 = prompt("Enter 2nd Number");
+ obj.setData(n1*1 , n2*1);
+ if(choice == "1")
+   obj.add();
+ else if(choice == "2")
+   obj.sub();
+ else if(choice == "3")
+   obj.multiply();    
+
+
+
+</script>

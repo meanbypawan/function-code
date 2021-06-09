@@ -1,0 +1,25 @@
+<script>
+    function Test(){
+        this.a = 10;
+        this.b = 20;
+        this.c = 30;
+
+        this.setF = function(){
+          this.f = 60;
+        }
+        
+        this.display = function(){
+            document.write("a : "+this.a+
+            "<br>b : "+this.b+
+            "<br>c : "+this.c+
+            "<br>d : "+this.d+
+            "<br>e : "+this.e+
+            "<br>f : "+this.f)
+        }
+    }
+
+    var obj = new Test(); // a,b,c,d,e
+    obj.display();
+    obj.setF();
+    obj.display();
+</script>

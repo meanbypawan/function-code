@@ -1,0 +1,28 @@
+<script>
+    /*
+     {"key": value} :---Object Notation
+     Customer(id,name,mobile,bal,emailid,account_no)
+    */
+   var c = {
+            "id":1,
+            "cname": "Rahul",
+            "mobile": "9009111222",
+            "emailid": "rahul@gmail.com",
+            "account_no": "sbi12222",
+            "bal" : 10000,
+            "balanceEnquiry": function(){
+                document.write("<br>Total Balance : "+this.bal);
+             },
+             "showDetails": function(){
+               document.write("Id : "+this.id+
+               "<br>Name : "+this.cname+
+               "<br>Mobile : "+this.mobile+
+               "<br>EmailId : "+this.emalid+
+               "<br>Account No : "+this.account_no)      
+             }
+
+            };
+
+      c.showDetails();
+      c.balanceEnquiry();      
+</script>
