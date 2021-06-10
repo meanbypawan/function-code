@@ -1,0 +1,38 @@
+<html>
+    <head>
+      <script>
+        function operation(currentButton){
+           var n1 = document.getElementById("first").value;
+           var n2 = document.getElementById("second").value;
+           var p = document.getElementById("result");
+           var a = parseFloat(n1);
+           var b = parseFloat(n2);
+           
+           if(currentButton.id == "add"){
+             p.innerHTML = "Additon : "+(a+b);
+           }
+           else if(currentButton.id == "sub"){
+            p.innerHTML = "Subtraction : "+(a-b);
+           }
+           else if(currentButton.id == "mult"){
+            p.innerHTML = "Multiplication : "+(a*b);
+           }
+           else if(currentButton.id == "div"){
+            p.innerHTML = "Divistion : "+(a/b);
+           }
+        }
+      </script>
+    </head>
+    <body>
+        <input type="text" id="first" placeholder="Enter 1st number"/>
+        <br>
+        <input type="text" id="second" placeholder="Enter the 2nd number"/>
+        <br>
+        <button id="add" onclick="operation(this)">ADD</button>
+        <button id="sub" onclick="operation(this)">Sub</button>
+        <button id="mult" onclick="operation(this)">Multiplication</button>
+        <button id="div" onclick="operation(this)">Division</button>
+
+        <p id="result"></p>
+    </body>
+</html>

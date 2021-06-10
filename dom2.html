@@ -1,0 +1,56 @@
+<html>
+    <head>
+      <script>
+          function addition(){
+            //alert("Addition called..");
+            var input1 = document.getElementById("first");
+            var input2 = document.getElementById("second");
+
+            var n1 = input1.value;
+            var n2 = input2.value;
+
+            alert("Addition + "+(n1*1 + n2*1));
+          }
+          function subtraction(){
+            var input1 = document.getElementById("first");
+            var input2 = document.getElementById("second");
+
+            var n1 = input1.value;
+            var n2 = input2.value;
+
+            alert("Sub. + "+(n1*1 - n2*1));
+          
+          }
+          function multiplication(){
+            var input1 = document.getElementById("first");
+            var input2 = document.getElementById("second");
+
+            var n1 = input1.value;
+            var n2 = input2.value;
+
+            alert("Multiplication + "+((n1*1) * (n2*1)));
+          
+          }
+          function division(){
+            var input1 = document.getElementById("first");
+            var input2 = document.getElementById("second");
+
+            var n1 = input1.value;
+            var n2 = input2.value;
+
+            alert("Division + "+((n1*1) / (n2*1)));
+          
+          }
+      </script>
+    </head>
+    <body>
+        <input type="text" id="first" placeholder="Enter 1st number"/>
+        <br>
+        <input type="text" id="second" placeholder="Enter the 2nd number"/>
+        <br>
+        <button id="add" onclick="addition()">ADD</button>
+        <button id="sub" onclick="subtraction()">Sub</button>
+        <button id="mult" onclick="multiplication()">Multiplication</button>
+        <button id="div" onclick="division()">Division</button>
+    </body>
+</html>

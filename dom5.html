@@ -1,0 +1,34 @@
+<html>
+    <head>
+      <script>
+          function operation(){
+              
+              var n1 = document.getElementById("first").value;
+              var n2 = document.getElementById("second").value;
+              var n3 = document.getElementById("third").value;
+              var result = document.getElementById("result");
+              if(n1 == "")
+                n1 = 0; 
+              if(n2 == "")
+                n2 = 0;
+              if(n3 == "")
+                n3 = 0;    
+              n1 = parseFloat(n1);
+              n2 = parseFloat(n2);
+              n3 = parseFloat(n3);
+
+              var n4 = n1 + n2 + n3;
+              result.innerHTML = "Result : "+n4;
+          }
+      </script>
+    </head>
+    <body>
+        <input onkeyup="operation()" type="text" id="first"/>
+        <br><br>
+        <input onkeyup="operation()" type="text" id = "second"/>
+        <br><br>
+        <input onkeyup="operation()" type="text" id="third"/>
+        <br><br>
+        <p id="result">Result : </p>
+    </body>
+</html>
