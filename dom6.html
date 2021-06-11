@@ -1,0 +1,117 @@
+<html>
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <style>
+            .customRed{
+                background-color: red;
+            }
+        </style>
+        <script>
+            function changeTableTheme(buttonObject){
+               var tableObject = document.getElementById("dataTable");
+               var rowArray = tableObject.rows;
+                for(var i=0; i<rowArray.length; i++){
+                   var singleRow = rowArray[i];
+                   /*
+                     var columnArray = singleRow.cells;
+                     for(var j=0; j<columnArray.length; j++){
+                         var col = columnArray[j]
+                         
+                     }
+                   */
+                   
+                   singleRow.className = "";
+                   if(buttonObject.id == "rg"){
+                    if(i%2==0){
+                     singleRow.classList.add("customRed");
+                    }
+                    else{
+                      singleRow.classList.add("bg-success");
+                    }
+                   }
+                   else if(buttonObject.id == "gb"){
+                    if(i%2==0){
+                     singleRow.classList.add("bg-success");
+                    }
+                    else{
+                      singleRow.classList.add("bg-primary");
+                    }
+                   }
+                   else if(buttonObject.id == "br"){
+                    if(i%2==0){
+                     singleRow.classList.add("bg-primary");
+                    }
+                    else{
+                      singleRow.classList.add("bg-danger");
+                    }
+                   }
+                   else if(buttonObject.id == "ro"){
+                    if(i%2==0){
+                     singleRow.classList.add("bg-damger");
+                    }
+                    else{
+                      singleRow.classList.add("bg-warning");
+                    }
+                   }
+                   
+               }
+            }
+        </script>
+    </head>
+    <body>
+        <table id="dataTable" class="table">
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Mobile</td>
+                <td>Age</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Rahil</td>
+                <td>9009111222</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Rahil</td>
+                <td>9009111222</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Rahil</td>
+                <td>9009111222</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Rahil</td>
+                <td>9009111222</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Rahil</td>
+                <td>9009111222</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Rahil</td>
+                <td>9009111222</td>
+                <td>21</td>
+            </tr>
+        </table>
+        <button onclick="changeTableTheme(this)" id="rg">Red-Green</button>
+        <button onclick="changeTableTheme(this)" id="gb">Green-Blue</button>
+        <button onclick="changeTableTheme(this)" id="br">Blue-Red</button>
+        <button onclick="changeTableTheme(this)" id="ro">Red-orange</button>
+    </body>
+</html>

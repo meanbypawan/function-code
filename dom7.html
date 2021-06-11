@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <style>
+            #mainDiv{
+                width: 100%;
+                height: 300px;
+                border: 1px solid black;
+            }
+        </style>
+        <script>
+            function changeDiv(){
+              var divObject  = document.getElementById("mainDiv");
+              /*
+               divObject.style.backgroundColor="red";
+               divObject.style.color = "white";
+              */
+             divObject.classList.add("bg-danger","text-success");
+            
+            }
+        </script>
+    </head>
+    <body>
+        <div id="mainDiv">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus ea id debitis blanditiis officiis autem vero eligendi sint molestias perspiciatis.
+        </div>
+        <button onclick="changeDiv()">ChangeDiv</button>
+    </body>
+</html>
