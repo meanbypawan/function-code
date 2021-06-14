@@ -2,6 +2,11 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        small{
+            color:red;
+        }
+    </style>
     <script>
         function validateData(){
             var status = true;
@@ -15,12 +20,16 @@
                 usernameError.innerHTML = "Username required";
                 status = false;
             }
-
+            else{
+                usernameError.innerHTML="";
+            }
             if(password.length == 0){
                 passwordError.innerHTML = "Password required";
                 status = false;
             }
-
+            else{
+                passwordError.innerHTML = "";
+            }
             return status;
         }
     </script> 
@@ -30,12 +39,12 @@
           <form>
               <div class="form-group">
                   <label>Username</label>
-                  <input type="text" id="username" class="form-control"/>
+                  <input onkeyup="validateData()" type="text" id="username" class="form-control"/>
                   <small id="usernameError"></small>
               </div>
               <div class="form-group">
                   <label>Password</label>
-                  <input type="password" id="password" class="form-control"/>
+                  <input onkeyup="validateData()" type="password" id="password" class="form-control"/>
                   <small id="passwordError"></small>
               </div>
               <div class="form-group">

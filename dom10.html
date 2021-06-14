@@ -1,0 +1,10 @@
+<html>
+    
+    <body>
+        <script>
+            var testString = "abcdefA@1";
+            var status = testString.match('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$');
+            document.write(status);
+        </script>
+    </body>
+</html>
