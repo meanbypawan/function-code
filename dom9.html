@@ -10,14 +10,20 @@
     <script>
       function validateUserName(){
          var status = true;
+         var usernameInpoutObject =document.getElementById("username");
+
          var username = document.getElementById("username").value;
          var usernameError = document.getElementById("usernameError");
          if(username.length == 0){
            usernameError.innerHTML = "Username required";
            status = false;
+           usernameInpoutObject.classList.add("border","border-danger");
          }
-         else
+         else{
            usernameError.innerHTML = "";
+           usernameInpoutObject.classList.remove("border-danger");
+           usernameInpoutObject.classList.add("border-success");
+         }
          return status;
       }
       function validatePassword(){
@@ -26,7 +32,8 @@
          1) Is Empty condition
          2) 6-10 letter
        */
-        var password = document.getElementById("password").value;
+        var passwordObject = document.getElementById("password");
+        var password = passwordObject.value;
         
         var passwordError = document.getElementById("passwordError");
         
@@ -40,10 +47,14 @@
         if(result == null){
             passwordError.innerHTML = "Password must containt at lest 8 letter 1 uppercase 1 lowercase and 1 special charachter";
             status = false;
+            passwordObject.classList.add("border","border-danger");
         }
-        else
+        else{
           passwordError.innerHTML = "";
-        /*
+          passwordObject.classList.remove("border-danger");
+          passwordObject.classList.add("border-success");
+        }
+          /*
         if(password.length == 0){
             status = false;
             passwordError.innerHTML = "Password required";
@@ -66,7 +77,8 @@
             2) length should be 10
             3) only digit allowed
           */
-         var mobileNumber  = document.getElementById("mobile").value;
+         var mobileObject = document.getElementById("mobile");
+         var mobileNumber  = mobileObject.value;
          var mobileError = document.getElementById("mobileError");
          
          if(mobileNumber.length == 0){
@@ -83,7 +95,75 @@
          }
          else
            mobileError.innerHTML = "";
+         
+         if(status == false){
+            mobileObject.classList.add("border","border-danger");
+         }
+         else{
+            mobileObject.classList.remove("border-danger");
+            mobileObject.classList.add("border-success");
+         }   
          return status;
+      }
+      function validateConfirmPassword(){
+          var status = true;
+          var confirmPasswordObject = document.getElementById("confirmPassword");
+
+          var password = document.getElementById("password").value;
+          var confirmPassword = confirmPasswordObject.value;
+          var confirmPasswordError = document.getElementById("confirmPasswordError");
+          
+          if(password != confirmPassword){
+             
+             confirmPasswordError.innerHTML = "Password not matched.";
+             status = false;
+             confirmPasswordObject.classList.add("border","border-danger");
+          }
+          else{
+           confirmPasswordError.innerHTML = "";
+           confirmPasswordObject.classList.remove("border-danger");
+           confirmPasswordObject.classList.add("border-success");
+          }
+          if(confirmPassword == "")
+            confirmPasswordObject.classList.remove("border-success");
+          return status;
+      }
+
+      function validateCity(){
+        var status = true;
+        var city = document.getElementById("city").value;
+        var cityError = document.getElementById("cityError");
+        if(city == "0"){
+          cityError.innerHTML="Please select city";
+          status = false;
+        }
+        else{
+          cityError.innerHTML = "";
+        }
+        return status;
+      }
+      function validateSkillSet(){
+        var status = true;
+        var skillSetObject = document.getElementById("skillSet");
+        var skillSetError = document.getElementById("skillSetError");
+        
+        var optionArray = skillSetObject.getElementsByTagName("option");
+        var selectedSkillSet = [];
+        //selectedSkillSet.push(100);
+        for(var i = optionArray.length;i--;){
+            if(optionArray[i].selected){
+               selectedSkillSet.push(optionArray[i].value);
+            }   
+        }
+        if(selectedSkillSet.length < 2){
+          skillSetError.innerHTML = "please select at least 2 skill";
+          status = false;
+        }
+        else{
+          skillSetError.innerHTML = "";
+        }
+
+        return status;
       }
       function validateData(){
           var status = true;
@@ -99,6 +179,17 @@
           if(mobileStatus == false)
            status = false;
          
+          var confirmPasswordStatus = validateConfirmPassword();
+          if(confirmPasswordStatus == false)
+            status = false;
+
+          var cityStatus = validateCity();
+          if(cityStatus == false)
+            status = false;
+
+          var skillSetStatus = validateSkillSet();
+          if(skillSetStatus == false)
+            status = false;  
           if(status)
            alert("Registration Success");
             
@@ -123,13 +214,46 @@
                   <input onkeyup = "validatePassword()" type="password" id="password" class="form-control"/>
                   <small id="passwordError"></small>
                   <span onclick="showPassword()">Show password</span>
-                  
+              </div>
+              <div class="form-group">
+                <label>Confirm password</label>
+                <input type="password" onkeyup="validateConfirmPassword()" class="form-control" id="confirmPassword"/>
+                <small id="confirmPasswordError"></small>
               </div>
               <div class="form-group">
                 <label>Mobile number</label>
                 <input onkeyup="validateMobileNumber()" type="text" class="form-control" id="mobile"/>
                 <small id="mobileError"></small>
               </div>
+              <div class="form-group">
+                <label>City</label>
+                <select onchange="validateCity()" id="city" class="form-control">
+                  <option value="0">Select city</option>
+                  <option value="1">Indore</option>
+                  <option value="2">Bhopal</option>
+                  <option value="3">Pune</option>
+                  <option value="4">Chennai</option>
+                </select>
+                <small id="cityError"></small>
+              </div>     
+              
+              <div class="form-group">
+                <label>Select your skill</label>
+                <select onchange="validateSkillSet()" id="skillSet" multiple class="form-control">
+                   <option value="0">select skill</option>
+                   <option value="1">Java</option>
+                   <option value="2">Android</option>
+                   <option value="3">Angular</option>
+                   <option value="4">Python</option>
+                   <option value="5">Ruby</option>
+                   <option value="6">Spring</option>
+                   <option value="7">Spring-Boot</option>
+                </select>
+                <small id="skillSetError"></small>
+              </div>
+              <div class="form-group">
+                <input type="file" id="upload"/>
+              </div>       
               <div class="form-group">
                   <button onclick="return validateData()" type="submit" class="btn btn-primary">Register</button>
               </div>
