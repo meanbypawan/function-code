@@ -165,6 +165,36 @@
 
         return status;
       }
+      function validateFile(){
+        var status = true;
+        var filePath = document.getElementById("upload").value;
+        var fileError = document.getElementById("fileError");
+        var dotIndex = filePath.lastIndexOf(".");
+        var fileExtension = filePath.substring(dotIndex);
+        if(fileExtension != ".xlsx"){
+           fileError.innerHTML = "Please select xlx file only";
+           status = false;
+        }
+        else{
+          fileError.innerHTML = "";
+        }
+        return status;
+      }
+      function validateHobbies(){
+        var status = true;
+        var hockey = document.getElementById("chkHocky").checked;
+        var footboll = document.getElementById("chkFootboll").checked;
+        var cricket = document.getElementById("chkCricket").checked;
+        var hobbiesError=  document.getElementById("hobbiesError");
+        if(hockey == false && footboll == false && cricket == false){
+          status = false;
+          hobbiesError.innerHTML="please select at least one hobby";
+        }
+        else{
+          hobbiesError.innerHTML = "";
+        }
+        return status;
+      }
       function validateData(){
           var status = true;
           var usernameStatus = validateUserName();
@@ -190,9 +220,18 @@
           var skillSetStatus = validateSkillSet();
           if(skillSetStatus == false)
             status = false;  
+          
+          var fileStatus = validateFile();
+          if(fileStatus == false)
+            status = false;
+
+          var hoobiesStatus = validateHobbies();
+          if(hoobiesStatus == false)
+            status = false;  
           if(status)
            alert("Registration Success");
             
+
           return status;
       }
       function showPassword(){
@@ -252,9 +291,29 @@
                 <small id="skillSetError"></small>
               </div>
               <div class="form-group">
-                <input type="file" id="upload"/>
+                <input type="file" id="upload" onchange="validateFile()" accept=".xlsx"/>
+                <small id="fileError"></small> 
               </div>       
-              <div class="form-group">
+              <div class="form-groip">
+                <label>Select hobbies</label>
+              </div>
+              <div class="form-check form-check-inline">
+                 <input onchange="validateHobbies()" type="checkbox" class="form-check-input" id="chkHocky"/>
+                  <label class="form-check-label">Hockey</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input onchange="validateHobbies()" type="checkbox" class="form-check-input" id="chkCricket"/>
+                 <label class="form-check-label">Circket</label>
+             </div>
+             <div class="form-check form-check-inline">
+              <input onchange="validateHobbies()" type="checkbox" class="form-check-input" id="chkFootboll"/>
+               <label class="form-check-label">Footboll</label>
+               
+              </div>
+              <div>
+                <small id="hobbiesError"></small>
+              </div>
+               <div class="form-group">
                   <button onclick="return validateData()" type="submit" class="btn btn-primary">Register</button>
               </div>
           </form>
