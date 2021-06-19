@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+      <div class="container">  
+        <div class="form-group" id="state">
+        </div>
+        <div class="form-group" id="city">
+            <label>City</label>
+            <select class="form-control">
+            </select>
+        </div>
+      </div>
+
+      <script>
+          var xhttp = new XMLHttpRequest();
+          var apiUrl = "http://localhost:8080/TestApi/state_list.jsp";
+          xhttp.open("GET",apiUrl,true);
+          xhttp.send();
+
+          // process the response
+          xhttp.onreadystatechange = function(){
+              if(xhttp.status == 200 && xhttp.readyState == 4){
+                var jsonData =  JSON.parse(xhttp.responseText);
+                var selectString = "<label>Select state</label>";
+                selectString = selectString+"<select onchange='getCityList()' id='selectedState' class='form-control'><option value='0'>Select state</option>";
+                for(index in jsonData){
+                   var obj = jsonData[index]; 
+                   selectString = selectString+"<option value='"+obj.id+"'>"+obj.stateName+"</option>";
+                }
+                selectString = selectString +"</select>";
+                document.getElementById("state").innerHTML = selectString;  
+            }
+          }
+
+          function getCityList(){
+            var stateId =  document.getElementById("selectedState").value;
+            var api = "http://localhost:8080/TestApi/city_list.jsp?stateId="+stateId;
+            xhttp.open("GET",api,true);
+
+            xhttp.send();
+
+            // process the response
+            xhttp.onreadystatechange = function(){
+                
+                if(xhttp.readyState == 4 && xhttp.status == 200){
+                    alert(xhttp.responseText);
+                    var cityDiv = document.getElementById("city");
+                    cityDiv.innerHTML = "";
+
+                    var selectString = "<label>Select City</label>";
+                     selectString = selectString+"<select id='selectedCity' class='form-control'><option value='0'>Select state</option>";
+                
+                    var jsonData = JSON.parse(xhttp.responseText);
+                    for(index in jsonData){
+                        
+                        var obj = jsonData[index];
+                        selectString = selectString +"<option value='"+obj.id+"'>"+obj.cityName+"</option>"; 
+                    }
+                    selectedString = selectString+"</select>";
+                    cityDiv.innerHTML = selectString;
+                }
+            }
+          }
+      </script>
+    </body>
+</html>

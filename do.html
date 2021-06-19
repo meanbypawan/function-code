@@ -1,0 +1,263 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        small{
+            color:red;
+        }
+        .form-check-input:checked~.form-check-label::after{
+           background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='red' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+       }
+    </style>
+    <script>
+      function validateUserName(){
+         var status = true;
+         var username = document.getElementById("username").value;
+         
+         var usernameError = document.getElementById("usernameError");
+         if(username.length == 0){
+           usernameError.innerHTML = "Username required";
+           status = false;
+           document.getElementById("username").classList.add("border","border-danger"); 
+        }
+         else{
+           usernameError.innerHTML = "";
+           document.getElementById("username").classList.remove("border","border-danger");
+           document.getElementById("username").classList.add("border","border-success");
+
+         }
+         return status;
+      }
+      function validatePassword(){
+        var status = true;
+        /*
+         1) Is Empty condition
+         2) 6-10 letter
+       */
+        var password = document.getElementById("password").value;
+        
+        var passwordError = document.getElementById("passwordError");
+        
+        // at least 8 letter
+        // at least one uppercase
+        // at least one lower case
+        // at one special symbol
+        var regEx = "^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$";
+
+        var result = password.match(regEx);
+        if(result == null){
+            passwordError.innerHTML = "Password must containt at lest 8 letter 1 uppercase 1 lowercase and 1 special charachter";
+            status = false;
+            document.getElementById("password").classList.add("border","border-danger");
+        }
+        else{
+          passwordError.innerHTML = "";
+          document.getElementById("password").classList.remove("border-danger");
+          document.getElementById("password").classList.add("border-success");
+        }
+        /*
+        if(password.length == 0){
+            status = false;
+            passwordError.innerHTML = "Password required";
+        }
+        else if(password.length<6 || password.length>10){
+            status = false;
+            passwordError.innerHTML = "Password should be 6 to 10 letter long";
+        }
+        else
+          passwordError.innerHTML = "";
+        */
+          return status;
+
+      }
+      function validateMobileNumber(){
+          var status = true;
+          /*
+            1) Empty condition
+            2) length should be 10
+            3) only digit allowed
+          */
+         var mobileNumber  = document.getElementById("mobile").value;
+         var mobileError = document.getElementById("mobileError");
+         
+         if(mobileNumber.length == 0){
+             status = false;
+             mobileError.innerHTML = "Mobile number required";
+         }
+         else if(mobileNumber.length !=10){
+             status = false;
+             mobileError.innerHTML = "Mobile must containt 10 digit";
+         }
+         else if(isNaN(mobileNumber)){
+             status = false;
+             mobileError.innerHTML = "Only digit allowed";
+         }
+         else
+           mobileError.innerHTML = "";
+         return status;
+      }
+      function validateCity(){
+         var status = true;
+         var city  = document.getElementById("city").value;
+         var cityError = document.getElementById("cityError");
+         if(city == "0"){
+            cityError.innerHTML = "Please select city";
+            status = false;
+         }
+         else
+           cityError.innerHTML = "";
+         return status;  
+      }
+
+      function validateMultipleCity(){
+          var status = true;
+          var multipleCity = document.getElementById("multipleCity");
+          var multipleCityError = document.getElementById("multipleCityError");
+          
+          var optionArray = multipleCity.getElementsByTagName("option");   
+          var selectedValues = [];
+          for(var i=optionArray.length; i--;){
+              if(optionArray[i].selected)
+                selectedValues.push(optionArray[i].value);
+          } 
+          if(selectedValues.length<2){
+             multipleCityError.innerHTML="Select at least 2 city";
+             status = false;
+          }
+          else
+            multipleCityError.innerHTML = "";
+            return status; 
+      }
+      function validateFile(){
+          var file = document.getElementById("CustomFile").value;
+          alert(file);
+      }
+      function validateData(){
+          var status = true;
+          var usernameStatus = validateUserName();
+          if(usernameStatus == false)
+           status = false;
+
+          var passwordStatus = validatePassword();    
+          if(passwordStatus == false)
+            status = false;
+
+          var mobileStatus = validateMobileNumber();
+          if(mobileStatus == false)
+           status = false;
+       
+          var cityStatus = validateCity();
+          if(cityStatus == false)
+           status = false;
+
+          var multipleCityStatus = validateMultipleCity();
+          if(multipleCityStatus == false)
+           status = false; 
+          if(status)
+           alert("Registration Success");
+            
+          var filePath = document.getElementById("customFile").value;
+          var lastIndex = filePath.lastIndexOf(".");
+          var fileExtenstion = filePath.substring(lastIndex);
+          alert(fileExtenstion);  
+          return status;
+      }
+      
+      function showPassword(){
+          var passwordInputField = document.getElementById("password");
+          passwordInputField.type = "text";
+      }
+      function changeBorderColor(){
+          var username = document.getElementById("username");
+          username.style.borderColor= "black";
+          //username.style.outline = none; 
+      }
+    </script> 
+ </head>
+  <body>
+      <div class="container">
+          <form>
+              <div class="form-group">
+                  <label>Username</label>
+                  <input onfocus="changeBorderColor()" onkeyup="validateUserName()" type="text" id="username" class="form-control shadow-none"/>
+                  <small id="usernameError"></small>
+              </div>
+              <div class="form-group">
+                  <label>Password</label>
+                  <input onkeyup = "validatePassword()" type="password" id="password" class="form-control"/>
+                  <small id="passwordError"></small>
+                  <span onclick="showPassword()">Show password</span>
+                  
+              </div>
+              <div class="form-group">
+                <label>Mobile number</label>
+                <input onkeyup="validateMobileNumber()" type="text" class="form-control" id="mobile"/>
+                <small id="mobileError"></small>
+              </div>
+              <div class="form-group">
+                  <label>City</label>
+                  <select onchange="validateCity()" id="city" class="custom-select">
+                      <option value="0">Select city</option>
+                      <option value="1">Indore</option>
+                      <option value="2">Chennai</option>
+                      <option value="3">Jablpur</option>
+                      <option value="4">Pune</option>
+                      <option value="5">Delhi</option>
+                  </select>
+                  <small id="cityError"></small>
+              </div>
+
+              <div class="form-group">
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Hobbies</button>
+                  <ul class="dropdown-menu p-3">
+                    <li><label><input type="checkbox"/>&nbsp;&nbsp;&nbsp;&nbsp;Circket</label></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>City</label>
+                <select multiple="true" onchange="validateMultipleCity()" id="multipleCity" class="form-control">
+                    <option value="0">Select city</option>
+                    <option value="1">Indore</option>
+                    <option value="2">Chennai</option>
+                    <option value="3">Jablpur</option>
+                    <option value="4">Pune</option>
+                    <option value="5">Delhi</option>
+                </select>
+                <small id="multipleCityError"></small>
+              </div>
+              <div class="form-group">
+                  <input type="file" id="customFile"/>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                <label class="form-check-label" for="flexCheckIndeterminate">
+                  Indeterminate checkbox
+                </label>
+              </div>
+              
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label class="form-check-label" for="inlineCheckbox1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label class="form-check-label">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
+                <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+              </div>
+              <div class="form-group"></div>
+              <div class="form-group">
+                  <button onclick="return validateData()" type="submit" class="btn btn-primary">Register</button>
+              </div>
+          </form>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

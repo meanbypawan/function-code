@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        
+        <div class="container">
+            <div class="form-group" id="stateList">
+            </div>
+        </div>
+        <script>
+           var xhttp = new XMLHttpRequest();
+           xhttp.open("GET","http://localhost:8080/TestApi/state_list.jsp",true);
+           xhttp.withCredentials = false;
+           xhttp.send();
+           xhttp.onreadystatechange = function(){
+               if(xhttp.readyState == 4 && xhttp.status == 200){
+                   var data = JSON.parse(xhttp.responseText);
+                   var selectString = "<label>State</label><select class='form-control'>";
+                   for(index in data){
+                     selectString = selectString+"<option value='"+data[index].id+"'>"+data[index].stateName+"</optipn>";  
+                   }
+                   selectString = selectString+"</select>";
+                   document.getElementById("stateList").innerHTML = selectString;
+                }
+           } 
+        </script>
+    </body>
+</html>

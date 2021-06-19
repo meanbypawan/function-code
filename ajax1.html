@@ -1,0 +1,42 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            /*
+               api :-- 1) get
+                       2) post
+            */
+            var xhttp = new XMLHttpRequest();
+            var apiUrl = "https://jsonplaceholder.typicode.com/posts";
+   
+            xhttp.open("GET",apiUrl,true);
+
+            xhttp.send();
+
+            xhttp.onreadystatechange = function(){
+                if(xhttp.readyState == 4 && xhttp.status == 200){
+                    var jsonData = JSON.parse(xhttp.responseText);
+                    document.write("<table border='1' width='100%'>");
+                    document.write("<tr>");
+                    document.write("<td>UserId</td>");
+                    document.write("<td>Id</td>");
+                    document.write("<td>title</td>");
+                    document.write("<td>body</td>");            
+                    document.write("</tr>");
+                    for(index in jsonData){
+                        var obj = jsonData[index];
+                        document.write("<tr>");
+                        document.write("<td>"+obj.userId+"</td>");
+                        document.write("<td>"+obj.id+"</td>");
+                        document.write("<td>"+obj.title+"</td>");
+                        document.write("<td>"+obj.body+"</td>");            
+                        document.write("</tr>");
+                    }
+                    document.write("</table>");
+                }
+            }
+        </script>
+    </body>
+</html>
